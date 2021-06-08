@@ -43,10 +43,13 @@ betanames<- names(betas)
 
 
 #using yield instead of logyield
-pw_simplefit<- lm(yield~ ., data= pwl_data)
+dat2<- cbind(pwl_data$yield, dat[,-which(colnames(dat)=="logyield")])
+colnames(dat2)[1]<- "yield"
+pw_simplefit<- lm(yield~ ., data= dat2)
+#load("/storage/work/svr5482/Climate_CornYield-me/prelim_models/pw_simplefit")
 save(pw_simplefit, file= "/storage/work/svr5482/Climate_CornYield-me/prelim_models/pw_simplefit")
-pwsf_summary<- summary(pw_simplefit)
-pwsf_summary
+#pwsf_summary<- summary(pw_simplefit)
+#pwsf_summary
 betas<-coef(pw_simplefit)
 betanames<- names(betas)
 
