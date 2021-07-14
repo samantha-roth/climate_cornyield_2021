@@ -44,7 +44,8 @@ for(j in inds1:inds54){
 }
 
 #timeloc.ord$year<- as.numeric(timeloc.ord$year)
-nyrs= 5
+#nyrs= 5
+nyrs= 2
 
 #compute number of observations per year
 obsperyr<- rep(NA,nyrs)
@@ -114,14 +115,15 @@ save(comboLocation,file="/storage/work/svr5482/Climate_CornYield-me/PICAR/pw_mul
 ##calculate the distances between the locations within each year
 distMatModList<- list()
 distMatCVList<- list()
+library(rdist)
 for(i in 1:nyrs){
   if(i==1){
-    distMatModList[[i]]<- as.matrix(rdist(gridLocation[1:cs.trsizes[i],]))
-    distMatCVList[[i]]<- as.matrix(rdist(CVgridLocation[1:cs.sizes[i],]))
+    distMatModList[[i]]<- as.matrix(rdist(gridLocation[1:cs.trsizes[i],],metric="euclidean"))
+    distMatCVList[[i]]<- as.matrix(rdist(CVgridLocation[1:cs.sizes[i],],metric="euclidean"))
   }
   if(i>1){
-    distMatModList[[i]]<- as.matrix(rdist(gridLocation[(cs.trsizes[i-1]+1):cs.trsizes[i],]))
-    distMatCVList[[i]]<- as.matrix(rdist(CVgridLocation[(cs.sizes[i-1]+1):cs.sizes[i],]))
+    distMatModList[[i]]<- as.matrix(rdist(gridLocation[(cs.trsizes[i-1]+1):cs.trsizes[i],],metric="euclidean"))
+    distMatCVList[[i]]<- as.matrix(rdist(CVgridLocation[(cs.sizes[i-1]+1):cs.sizes[i],],metric="euclidean"))
   }
 }
 #distMatMod<- as.matrix(rdist(gridLocation))
