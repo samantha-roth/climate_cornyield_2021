@@ -1,7 +1,7 @@
 #generateSamples with Schlenker and Roberts mean function
 #and block diagonal covariance structure
 rm(list=ls())
-library(fields) ; library(mvtnorm) ; library(classInt)
+library(rdist); library(mvtnorm) ; library(classInt)
 source(file = "/gpfs/group/kzk10/default/private/svr5482/Climate_CornYield-me/PICAR/source/sharedFunctions.R")
 
 load("/storage/work/svr5482/Climate_CornYield-me/SourceData/METDATA/pwl_norm_yrorder")
@@ -115,7 +115,7 @@ save(comboLocation,file="/storage/work/svr5482/Climate_CornYield-me/PICAR/pw_mul
 ##calculate the distances between the locations within each year
 distMatModList<- list()
 distMatCVList<- list()
-library(rdist)
+
 for(i in 1:nyrs){
   if(i==1){
     distMatModList[[i]]<- as.matrix(rdist(gridLocation[1:cs.trsizes[i],],metric="euclidean"))
